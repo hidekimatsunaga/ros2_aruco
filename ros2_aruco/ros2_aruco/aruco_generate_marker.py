@@ -19,7 +19,7 @@ class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter,
 def main():
     parser = argparse.ArgumentParser(formatter_class=CustomFormatter,
                                      description="Generate a .png image of a specified maker.")
-    parser.add_argument('--id', default=1, type=int,
+    parser.add_argument('--id', default=2, type=int,
                         help='Marker id to generate')
     parser.add_argument('--size', default=200, type=int,
                         help='Side length in pixels')
@@ -32,9 +32,9 @@ def main():
     args = parser.parse_args()
 
     dictionary_id = cv2.aruco.__getattribute__(args.dictionary)
-    dictionary = cv2.aruco.Dictionary_get(dictionary_id)
+    dictionary = cv2.aruco.getPredefinedDictionary(dictionary_id)
     image = np.zeros((args.size, args.size), dtype=np.uint8)
-    image = cv2.aruco.drawMarker(dictionary, args.id, args.size, image, 1)
+    image = cv2.aruco.generateImageMarker(dictionary, args.id, args.size)
     cv2.imwrite("marker_{:04d}.png".format(args.id), image)
 
 

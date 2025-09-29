@@ -145,7 +145,7 @@ class ArucoNode(rclpy.node.Node):
         self.intrinsic_mat = None
         self.distortion = None
 
-        self.aruco_dictionary = cv2.aruco.Dictionary_get(dictionary_id)
+        self.aruco_dictionary = cv2.aruco.getPredefinedDictionary(dictionary_id)
         self.aruco_parameters = cv2.aruco.DetectorParameters_create()
         self.bridge = CvBridge()
 
